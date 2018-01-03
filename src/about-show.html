@@ -1,0 +1,196 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/photo-gallery/photo-gallery.html">
+<link rel="import" href="../bower_components/flip-clock/flip-clock.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="shared-styles.html">
+
+
+<dom-module id="about-show">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+      .toolbar {
+          display: flex;
+          padding: 0 12px;
+        }
+        .toolbar-icon {
+          padding: 20px 12px;
+          cursor: pointer;
+        }
+        .toolbar-blank {
+          flex-grow: 1;
+        }
+        .countdown-timer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+        .countdown-timer p {
+          @apply --paper-font-display2;
+          font-size: 24px;
+          text-transform: uppercase;
+        }
+        .card h1 {
+          @apply --paper-font-display1;
+          margin: 0 auto;
+          width: 260px;
+          margin-bottom: 25px;
+        }
+        .map-page {
+          height: 600px;
+        }
+    </style>
+
+    <div class="card">
+      <div class="circle"><iron-icon icon="pug-icon:pug" class="pug-icon"></iron-icon></div>
+      <h1>About pugs show</h1>
+      <div class="countdown-timer">
+        <flip-clock display-mode="countdown" start-from="43840" auto></flip-clock>
+        <p>before the event left</p>
+      </div>
+      <paper-item class="shadow shadow-12dp">
+        <paper-tabs selected="{{selected}}" class="toolbar">
+          <paper-tab>where and when?</paper-tab>
+          <paper-tab>we are on the map</paper-tab>
+        </paper-tabs>
+        <iron-pages selected="{{selected}}">
+        <div class="where-page">
+          <paper-item-body two-line>
+            <div class="item primary">location:</div>
+            <div class="item secondary">st. petersburg</div>
+          </paper-item-body>
+          <paper-item-body two-line>
+            <div class="item primary">when</div>
+            <div class="item secondary">1-2 June</div>
+          </paper-item-body>
+        </div>
+        <div class="map-page">
+          <google-map fit-to-markers latitude="59.9342802" longitude="30.3350986" api-key="AIzaSyBu0BPITMSQPyQj3NaPMKXH_SA7lEx5_PM">
+            <google-map-marker latitude="59.9342802" longitude="30.3350986"></google-map-marker>
+          </google-map>
+        </div>
+      </iron-pages>
+        <custom-style>
+            <style is="custom-style">
+              .shadow-12dp { @apply --shadow-elevation-12dp; }
+              .shadow {
+                display: inline-block;
+                padding: 8px;
+                margin: 16px;
+                height: 100%;
+                width: 95%;
+              }
+              .toolbar {
+                height: 45px;
+                padding: 16px;
+                background: var(--default-primary-color);
+                color: var(--text-primary-color);
+                @apply --paper-font-display1;
+              }
+
+              .item, .disabled-item {
+                position: relative;
+                padding: 8px;
+                border: 1px solid;
+                border-color: var(--divider-color);
+                border-top: 0;
+              }
+
+              .primary {
+                color: var(--primary-text-color);
+                @apply --paper-font-body2;
+              }
+
+              .secondary {
+                color: var(--secondary-text-color);
+                @apply --paper-font-body1;
+              }
+
+              .gallery header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .gallery h2 {
+                @apply --paper-font-display2;
+                width: 490px;
+              }
+              
+              .about header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .about h2 {
+                @apply --paper-font-display2;
+                width: 235px;
+              }
+
+            </style>
+          </custom-style>
+      </paper-item>
+      <paper-item class="about shadow shadow-12dp">
+        <header class="toolbar"><h2>About show</h2></header>
+        <paper-item-body two-line>
+          <div class="item primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus interdum placerat. Vestibulum accumsan luctus odio, vel bibendum erat. Donec eu ullamcorper erat, et semper felis. Vivamus eleifend diam in turpis volutpat, et auctor mi auctor. Mauris porttitor blandit enim, sit amet viverra enim. Phasellus ullamcorper vel mauris id aliquet. Ut vitae nibh arcu. Sed pulvinar est quis dolor fermentum fringilla.</div>
+          <div class="item secondary">Cras vitae odio eu ligula sollicitudin volutpat ut id magna. Vivamus eu mi sapien. Nullam sed maximus tortor. Maecenas commodo ornare erat, sit amet mattis elit scelerisque id. Nullam feugiat, dolor vitae sodales fringilla, magna elit feugiat mauris, rhoncus iaculis est magna posuere arcu. Aliquam erat volutpat. In ullamcorper massa lacus, id ullamcorper sapien sollicitudin in. Maecenas vehicula justo non metus ullamcorper, id viverra nibh bibendum. Proin vel turpis at metus consequat convallis. Praesent lacus mauris, blandit eget efficitur vel, vehicula lobortis est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pretium auctor odio, a porttitor elit ullamcorper vitae. Cras justo felis, elementum ut porttitor at, maximus eu velit. Integer varius elementum leo sed pulvinar. Integer dictum elit in nulla placerat, quis molestie ligula condimentum.
+
+Morbi tincidunt aliquet augue non convallis. Vestibulum euismod consequat eros, sit amet commodo sem mattis eget. Nunc id enim arcu. Phasellus dignissim, neque in dapibus sagittis, tortor magna euismod nisl, ac pulvinar tellus nunc vitae quam. Nam ultricies, nisl pulvinar imperdiet egestas, ipsum lectus pellentesque diam, eget venenatis dolor odio a leo. Fusce dapibus iaculis ex, eget sollicitudin odio vestibulum a. Duis blandit interdum lectus, et finibus massa tincidunt et. Morbi et metus a tortor euismod semper. Pellentesque et lectus dolor.</div>
+        </paper-item-body>
+      </paper-item>
+      <div class="gallery shadow shadow-12dp">
+        <header class="toolbar"><h2>photo from the last show</h2></header>
+        <photo-gallery>
+          <div class="item" data-url="http://www.irishpugdogclub.com/uploads/1/3/2/6/13262218/maru-darlington-2013_orig.jpg"></div>
+          <div class="item" data-url="https://i.pinimg.com/originals/f8/c8/aa/f8c8aa385a19a6118a837a6aef355cba.jpg"></div>
+          <div class="item" data-url="https://puglove.com.au/wp-content/uploads/2016/09/img50-375x220.jpg"></div>
+          <div class="item" data-url="http://www.valleybrookpugs.com/uploads/2/0/8/8/20884520/pdi-0024_orig.jpg"></div>
+          <div class="item" data-url="http://www.irishpugdogclub.com/uploads/1/3/2/6/13262218/maru-darlington-2013_orig.jpg"></div>
+          <div class="item" data-url="https://i.pinimg.com/originals/f8/c8/aa/f8c8aa385a19a6118a837a6aef355cba.jpg"></div>
+          <div class="item" data-url="https://puglove.com.au/wp-content/uploads/2016/09/img50-375x220.jpg"></div>
+          <div class="item" data-url="http://www.valleybrookpugs.com/uploads/2/0/8/8/20884520/pdi-0024_orig.jpg"></div>
+          <div class="item" data-url="http://www.irishpugdogclub.com/uploads/1/3/2/6/13262218/maru-darlington-2013_orig.jpg"></div>
+          <div class="item" data-url="https://i.pinimg.com/originals/f8/c8/aa/f8c8aa385a19a6118a837a6aef355cba.jpg"></div>
+          <div class="item" data-url="https://puglove.com.au/wp-content/uploads/2016/09/img50-375x220.jpg"></div>
+          <div class="item" data-url="http://www.valleybrookpugs.com/uploads/2/0/8/8/20884520/pdi-0024_orig.jpg"></div>
+        </photo-gallery>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class AboutShow extends Polymer.Element {
+      static get is() { return 'about-show'; }
+      
+      static get properties() {
+            return {
+                selected: {
+                    type: Number,
+                    reflectToAttribute: true
+                }
+            };
+        }
+
+    constructor () {
+      super()
+      this.selected = 0
+    }
+
+    }
+
+    window.customElements.define(AboutShow.is, AboutShow);
+  </script>
+</dom-module>

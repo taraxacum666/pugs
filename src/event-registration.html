@@ -1,0 +1,150 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/promise-polyfill/promise-polyfill-lite.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="event-registration">
+  <template>
+    <style include="shared-styles">
+      :host {
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        align-items: center;
+      }
+      .shadow-12dp { @apply --shadow-elevation-12dp; }
+      .shadow {
+        display: inline-block;
+        padding: 8px;
+        margin: 16px;
+        height: 420px;
+        width: 450px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      paper-button {
+        margin: 16px;
+      }
+
+      form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      form paper-item-body {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      paper-button {
+        width: 200px;
+      }
+
+      paper-input {
+        width: 350px;
+      }
+      paper-button.custom {
+           --paper-button-ink-color: var(--paper-pink-a200);
+           These could also be individually defined for each of the
+             specific css classes, but we'll just do it once as an example
+           --paper-button-flat-keyboard-focus: {
+             background-color: var(--paper-pink-a200);
+             color: white !important;
+           };
+           --paper-button-raised-keyboard-focus: {
+             background-color: var(--paper-pink-a200) !important;
+             color: white !important;
+           };
+         }
+         paper-button.custom:hover {
+           background-color: var(--paper-indigo-100);
+         }
+         paper-button.indigo {
+           background-color: var(--paper-indigo-500);
+           color: white;
+           --paper-button-raised-keyboard-focus: {
+             background-color: var(--paper-pink-a200) !important;
+             color: white !important;
+           };
+         } 
+
+    </style>
+
+    <div class="event-registration">
+        <paper-item class="shadow shadow-12dp">
+          <form is="ajax-form" id="register">
+            <h2 class="toolbar">Register form<div class="circle"><iron-icon icon="pug-icon:pug" class="pug-icon"></div></h2>
+            <paper-item-body>
+            <paper-input name="name" label="Name" value="{{name}}"" auto-validate pattern="^[a-zA-Z]\w*$" error-message="invalide inputs!" required></paper-input>
+            <paper-input name="password" value="{{password}}"" label="Password" type="Password" auto-validate pattern="^[a-zA-Z]\w*$" error-message="invalide inputs!" required></paper-input>
+            <paper-input name="email" label="E-mail" value="{{email}}" auto-validate pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" error-message="invalide inputs!" required>
+              <iron-icon icon="icons:mail" slot="prefix"></iron-icon>
+            </paper-input>
+            <paper-button raised class="custom indigo" on-click="_send"><iron-icon icon="icons:send"></iron-icon>Submit!</paper-button>
+          </paper-item-body>
+          </form>
+          <iron-ajax method="POST" id='ajax' url="https://sheetsu.com/apis/v1.0qu/9268e17a9db7" 
+                   body="{{ajaxParams}}" content-type="application/json" >
+          </iron-ajax>
+          <paper-dialog id="success">
+            <h2>success</h2>
+            <p>sending done!</p>
+        </paper-dialog>
+        <paper-dialog id="error">
+            <h2>error</h2>
+            <p>not send</p>
+        </paper-dialog>
+      </paper-item>
+    </div>
+  </template>
+
+  <script>
+    class EventRegistration extends Polymer.Element {
+      static get is() { return 'event-registration'; }
+
+      _send(event){
+        let request = this.$.ajax.generateRequest();
+        let success = this.$.success;
+        let error = this.$.error;
+        request.completes.then(function(req){
+          console.log('Ok ', req);
+          success.open();
+        }, function(rejected){
+          error.open();
+        });
+      }
+
+      ready() {
+        super.ready();
+        this.name = "Pugs";
+        this.password = "rootpwd";
+        this.email = "test@test.com";
+        this. ajaxParams = {
+          id: "",
+          name: this.name,
+          password: this.password,
+          email: this.email
+      };
+      
+    }
+  }
+
+    window.customElements.define(EventRegistration.is, EventRegistration);
+  </script>
+</dom-module>
