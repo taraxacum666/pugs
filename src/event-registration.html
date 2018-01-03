@@ -123,7 +123,6 @@
         let success = this.$.success;
         let error = this.$.error;
         request.completes.then(function(req){
-          console.log('Ok ', req);
           success.open();
         }, function(rejected){
           error.open();
